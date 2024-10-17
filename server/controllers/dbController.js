@@ -1,11 +1,13 @@
-import mysql from "mysql"
+import mysql from "mysql2"
 
 export const getArticle = (req, res) => {
     const con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "aurora"
+        host: process.env.MYSQL_HOST,
+        port: process.env.MYSQL_PORT,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DBNAME,
+        connectionLimit: 100,
     })
     
     const sql = `SELECT * FROM ${req.params.obj} WHERE id=?`
@@ -20,11 +22,14 @@ export const getArticle = (req, res) => {
 }
 
 export const getArticles = (req, res) => {
+    console.log( process.env.MYSQL_HOST)
     const con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "aurora"
+        host: process.env.MYSQL_HOST,
+        port: process.env.MYSQL_PORT,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DBNAME,
+        connectionLimit: 100,
     })
     
     const sql = `SELECT * FROM ${req.params.obj}`
@@ -40,10 +45,12 @@ export const getArticles = (req, res) => {
 
 export const updateArticle = (req, res) => {
     const con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "aurora"
+        host: process.env.MYSQL_HOST,
+        port: process.env.MYSQL_PORT,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DBNAME,
+        connectionLimit: 100,
     })
 
     const sql = `UPDATE ${req.params.obj} SET title=?, contents=?, updated=NOW() WHERE id=?`
@@ -59,10 +66,12 @@ export const updateArticle = (req, res) => {
 
 export const createArticle = (req, res) => {
     const con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "aurora"
+        host: process.env.MYSQL_HOST,
+        port: process.env.MYSQL_PORT,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DBNAME,
+        connectionLimit: 100,
     })
 
     const sql = `INSERT INTO ${req.params.obj} (title, contents) VALUES (?, ?)`
@@ -78,10 +87,12 @@ export const createArticle = (req, res) => {
 
 export const deleteArticle = (req, res) => {
     const con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "aurora"
+        host: process.env.MYSQL_HOST,
+        port: process.env.MYSQL_PORT,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DBNAME,
+        connectionLimit: 100,
     })
 
     const sql = `DELETE FROM ${req.params.obj} WHERE id=?`

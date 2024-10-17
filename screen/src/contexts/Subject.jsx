@@ -20,7 +20,7 @@ export default function Subject() {
         }) 
         .catch(err => console.log(err))
   }, [params])
-
+  
   return <>
     {
         loaded
@@ -29,19 +29,21 @@ export default function Subject() {
             <h2 className='title'>
                 Aurora
             </h2>
-            <div className='grid'>
-                {
-                    data.map((val, i) => {
+            {
+                 data.length > 0 
+                 ? <div className="grid">
+                    {
+                      data.map((val, i) => {
                         return <div key={i} className="row">
-                            <h4>
+                            <h4 key={i}>
                                 {val.title}
                             </h4>
-                            <ul className="row__list">
+                            <ul key={i} className="row__list">
                                 {
                                     Object
                                       .keys(JSON.parse(val.contents))
                                       .map((val2, i2) => {
-                                         return <a href={`/${params.sub}/${val.id}/${val2}`}>
+                                         return <a key={i2} href={`/${params.sub}/${val.id}/${val2}`}>
                                             <li key={i2}>
                                                 {val2}
                                             </li>
@@ -50,9 +52,14 @@ export default function Subject() {
                                 }
                             </ul>
                         </div>
-                    })
-                }
-            </div>
+                      })
+                    }
+                </div>
+                : <p>
+                    Пока.. Здесь ничего нет
+                </p>
+            }
+            
          </div>
         </>
         : <Error />

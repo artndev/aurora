@@ -11,7 +11,6 @@ function Article() {
   const [loaded, setLoaded] = useState(false)  
   
   useEffect(() => {
-    console.log(params)
     axios.get(`http://localhost:5000/${params.sub}/${params.id}/`)
      .then(res => {
         if (!res.data)
@@ -19,7 +18,6 @@ function Article() {
 
         setData(res.data)
         setLoaded(true)
-        console.log(params.art.replaceAll("%20", ""))
      }) 
      .catch(err => console.log(err))
   }, [params])
@@ -29,14 +27,12 @@ function Article() {
         loaded
         ? <>
          <div className="flex">
-            <h2 className='title mb50'>
+            <h2 className='title'>
               {params.art.replaceAll("%20", "")}
             </h2>
             <div className='contents'>
               <Markdown>
-                {
-                  JSON.parse(data.contents)[params.art.replaceAll("%20", "")]
-                }
+                {JSON.parse(data.contents)[params.art.replaceAll("%20", "")]}
               </Markdown>
             </div>
          </div>
